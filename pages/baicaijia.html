@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="../css/init.css">
+<link rel="stylesheet" type="text/css" href="../css/baicaijia.css">
+<script type="text/javascript" src="../js/jquery-1.12.4.js"></script>
+<script type="text/javascript" src="../js/art/template-native.js"></script>
+<script type="text/javascript" src="../js/MLRoute.js"></script>
+<script type="text/javascript" src="../js/MLTools.js"></script>
+<script type="text/javascript" src="../js/rem.js"></script>
+<title>Document</title>
+</head>
+<body>
+  <header>
+    <div class="header-wrap">
+    <div class="app-down fr">
+      <img src="images/indexicons/header_app.png">
+    </div>
+       <div class="logo">
+        白菜价-淘宝内部价
+       </div>      
+    </div>
+  </header>
+  <!-- 滑动导航 -->
+  <nav class="slid-nav">
+    <div class="nav-drap">
+      <ul class="nav">
+      </ul>
+    </div>
+  </nav>
+  <script type="text/template" id="tpl-nav">
+    <%for(var i = 0 ;i < result.length;i++){%>
+      <a data-myid=<%=result[i].titleId%> href="javascript:;"><%=result[i].title%></a>
+    <%}%>
+  </script>
+  <!-- section主体 -->
+  <section class="etam">
+  </section>
+  <script type="text/template" id="tpl">
+    <%for(var i = 0; i< result.length;i++){%>
+      <div class="etam-wrap clearfix">
+        <div class="etam-img-wrap">
+          <%=result[i].productImg%>
+        </div>
+        <div class="etam-price">
+          <p class="tit">
+            <%=result[i].productName%>
+          </p>
+          <p class="price">
+            <%=result[i].productPrice%>
+          </p>
+          <%=result[i].productCouponRemain%>
+          <div class="etam-coupon">
+          <%=result[i].productCoupon%>
+          <%=result[i].productHref%>
+          </div>
+      </div>
+    </div>
+    <%}%>
+  </script>
+  
+  <!-- 底部 -->
+  <footer>
+    <div class="foot-list clearfix">
+      <div class="foot-item">
+        <button>登录</button>
+      </div>
+      <div class="foot-item">
+        <button>注册</button>
+      </div> 
+      <div class="foot-item">
+        <button>返回顶部</button>
+      </div>
+    </div>
+    <div class="copyRight"> 
+      <p><span>手机APP下载</span>慢慢买手机版--掌上比价平台</p>
+      <p>m.manmanbuy.com</p>
+    </div>
+  </footer>
+  <script type="text/javascript">
+    var $nav = $(".nav"); 
+
+  // 导航
+    (function(){
+      Route.getetam(function(data){
+      template.config("escape", false);
+      var str1 = template("tpl-nav",data);
+      $nav.html(str1);
+    })
+    })();
+
+// 点击事件
+    (function(){
+      var id = "";
+      $nav.on("click","a",function(event){
+      id = ($(this).attr("data-myid"));
+      $(this).addClass("active").siblings().removeClass("active");
+      Route.getetamlist(function(data){
+      template.config("escape", false);
+      var str = template("tpl",data);
+      $(".etam").html(str);
+    },id)
+    })
+    })();
+
+// 先加载第0项
+    (function(){
+      Route.getetamlist(function(data){
+      template.config("escape", false);
+      var str = template("tpl",data);
+      $(".etam").html(str);
+    },0);
+    })();
+
+    // 触摸事件
+    (function(){
+      var navDrap = document.querySelector(".nav-drap");
+      // console.log(navDrap);
+      var nav = document.querySelector(".nav") ;
+      // console.log(nav);
+      if(nav.offsetWidth <= navDrap.offsetWidth){
+        return ;
+      }
+
+      var startX = 0;//记录开始时的手指落点
+      var endX = 0//记录结束时的手机落点
+      var maxRight = 50;//滑动区间
+      var maxLeft = -(nav.offsetWidth - navDrap.offsetWidth + maxRight);//反弹区间
+      var maxBounceRight = 0;
+      var maxBounceLeft = -(nav.offsetWidth - navDrap.offsetWidth);
+      nav.addEventListener('touchstart',function(event){
+        startX = event.changedTouches[0].clientX;
+      })
+      nav.addEventListener("touchmove",function(event){
+
+        nav.style.transation = "none";
+        var dx = event.changedTouches[0].clientX - startX;//获取差值
+        // console.log(dx);
+        var tempX = endX + dx;
+        if(tempX < maxLeft){
+          tempX = maxLeft;
+        }else if(tempX > maxRight){
+          tempX = maxRight;
+        }
+        nav.style.transform = "translateX("+tempX+"px)";
+      });
+      nav.addEventListener("touchend",function(event){
+        var dx = event.changedTouches[0].clientX - startX;
+        endX += dx;
+        // console.log(edx);
+        if(endX > maxBounceRight){
+        endX = maxBounceRight;//同步x的值
+          nav.style.transation = "transform .5s";
+          nav.style.transform = "translateX("+endX+"px)";
+        }else if(endX < maxBounceLeft){
+          endX = maxBounceLeft;
+          nav.style.transation = "transform .5s";
+          nav.style.transform = "translateX("+endX+"px)"
+        }
+        // console.log(endX);
+        // nav.style.transform = "translateX("+endX+"px)";
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="../css/init.css">
+  <link rel="stylesheet" type="text/css" href="../css/coupon.css">
+  <script type="text/javascript" src="../js/rem.js"></script>
+
+  <script type="text/javascript" src="../js/art/template-native.js"></script>
+  <title>Document</title>
+</head>
+<body>
+  <header>
+    <div class="header-wrap">
+    <div class="app-down fr">
+      <img src="images/indexicons/header_app.png">
+    </div>
+       <div class="logo">
+        优惠券
+       </div>      
+    </div>
+  </header>
+
+  <section class="coupon clearfix">
+  </section>
+
+  <script type="text/template" id="tpl">
+    <%for(var i = 0 ;i < result.length;i++){%>
+      <div class="wrap-coupon fl">
+        <a href="coupondetail.html?id=<%=result[i].couponId%>&name=<%=result[i].couponTitle%>优惠券">
+          <div class="img-wrap">
+            <img src="<%=result[i].couponImg%>">
+          </div>
+          <p><%=result[i].couponTitle%></p>
+        </a>
+      </div>
+    <%}%>
+  </script>
+  <footer>
+    <div class="foot-list clearfix">
+      <div class="foot-item">
+        <button>登录</button>
+      </div>
+      <div class="foot-item">
+        <button>注册</button>
+      </div> 
+      <div class="foot-item">
+        <button>返回顶部</button>
+      </div>
+    </div>
+    <div class="copyRight"> 
+      <p><span>手机APP下载</span>慢慢买手机版--掌上比价平台</p>
+      <p>m.manmanbuy.com</p>
+    </div>
+  </footer>
+</body>
+<script type="text/javascript" src="../js/jquery-1.12.4.js"></script>
+<script type="text/javascript" src="../js/MLRoute.js"></script>
+<script type="text/javascript">
+
+(function(){
+ var coupon = document.querySelector(".coupon");
+  console.log(coupon);
+  Route.getcoupon(function(data){
+    var str = template("tpl",data);
+    // console.log(str);
+    coupon.innerHTML = str;
+
+  })
+})();
+ 
+</script>
+</html>

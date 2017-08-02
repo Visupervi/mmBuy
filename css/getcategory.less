@@ -1,0 +1,36 @@
+@import url(commen.less);
+.category-list{
+  & ul li{
+    text-align: left;
+    height: 2.0rem;
+    line-height: 2.0rem;
+    border-bottom: 1px solid #ccc;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-indent: 0.5rem;
+    & a{
+      color: #000;
+    }
+    & span{
+      font-size: 0.75rem;
+      margin-right: 0.5rem;
+    }
+  }
+  & ul .category-item{
+    background-color: @white;
+    & a {
+      width: 32.8%;
+      // display: none;
+      float: left;
+      text-align: center;
+      height: 1.5rem;
+      line-height: 1.5rem;
+      border: 0.025rem solid #ccc;
+      font-size: 0.75rem;
+      color: #000;
+    }
+  }
+  & ul .catgory-play{
+    display: block;
+  }
+}

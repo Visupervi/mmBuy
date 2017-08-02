@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <link rel="stylesheet" type="text/css" href="../css/init.css">
+ <!--  <link rel="stylesheet" type="text/css" href="../css/commen.css"> -->
+  <link rel="stylesheet" type="text/css" href="../css/inline.css
+  ">
+  <script type="text/javascript" src="../js/less.min.js"></script>
+  <script type="text/javascript" src="../js/rem.js"></script>
+  <script type="text/javascript" src="../js/MLRoute.js"></script>
+  <script type="text/javascript" src="../js/jquery-1.12.4.js"></script>
+  <script type="text/javascript" src="../js/MLTools.js"></script>
+  <script type="text/javascript" src="../js/art/template-native.js"></script>
+</head>
+<body>
+  <header>
+    <div class="header-wrap">
+    <div class="app-down fr">
+      <img src="images/indexicons/header_app.png">
+    </div>
+       <div class="logo">
+        省钱控-最新优惠
+       </div>
+       
+    </div>
+  </header>
+  <section class="inline-pro">
+    <div class="inline-pro-wrap">
+    </div>
+ 
+   <script type="text/template" id="tpl">
+        <p><%=result[0].productName%></p>
+        <p><span> <%=result[0].productFrom%> </span> <span><%=result[0].productTime%> </span> <span><%=result[0].productTips%> </span></p>
+
+        <!-- 图文绕排 -->
+        <div class="imgandtxt clearfix">
+          <div class="img-wrap fr">
+            <!-- <img src="images/cut.png"> -->
+            <%=result[0].productImgLg%>
+          </div>
+          <%=result[0].productInfo%>
+          <p><%=result[0].productInfo1%></p>
+        </div>
+
+        <!-- 大图片 -->
+        <div class="bgImg">
+          <!-- <img src="images/cut.png"> -->
+          <%=result[0].productImgLg%>
+        </div>
+   </script>
+     <div class="district">
+      </div>
+      <script type="text/template" id="tpl-place">
+        <%=result[0].productCity%>
+      </script>
+
+    <div class="gotobuy">
+        <button>前往购买</button>
+    </div>
+    <div class="qr-wrap">
+      <div class="qr">
+        <img src="../images/indexicons/mmbweixin2.png">
+      </div>
+    </div>
+    <div class="save-comment">
+      
+    </div>
+    <script type="text/template" id="tpl-com">
+      <%=result[0].productComment%>
+    </script>
+  </section>
+  <footer>
+    <div class="foot-list clearfix">
+      <div class="foot-item">
+        <button>登录</button>
+      </div>
+      <div class="foot-item">
+        <button>注册</button>
+      </div> 
+      <div class="foot-item">
+        <button>返回顶部</button>
+      </div>
+    </div>
+    <div class="copyRight"> 
+      <p><span>手机APP下载</span>慢慢买手机版--掌上比价平台</p>
+      <p>m.manmanbuy.com</p>
+    </div>
+  </footer>
+  <script type="text/javascript">
+    
+   (function(){
+    var $id = $.getUrlParam('id');
+    var $inlineProWrap = $(".inline-pro-wrap");
+    var $ul = $(".district");
+    var $saveComment = $(".save-comment");
+    Route.getmoneyctrlproduct(function(data){
+      template.config("escape", false);
+      var str = template("tpl",data);
+      var str1 = template("tpl-place",data);
+      var str2 = template("tpl-com",data);
+      // console.log(str2);
+      $saveComment.html(str2);
+      $inlineProWrap.html(str);
+      $ul.html(str1);
+    },$id)
+   })();
+  </script>
+</body>
+</html>

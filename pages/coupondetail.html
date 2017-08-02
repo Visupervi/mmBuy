@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="../css/init.css">
+  <link rel="stylesheet" type="text/css" href="../css/coupondetail.css">
+  <script type="text/javascript" src="../js/rem.js"></script>
+  <script type="text/javascript" src="../js/art/template-native.js"></script>
+  <script type="text/javascript" src="../js/jquery-1.12.4.js"></script>
+  <script type="text/javascript" src="../js/MLRoute.js"></script>
+  <script type="text/javascript" src="../js/MLTools.js"></script>
+  <title>Document</title>
+</head>
+<body>
+  <header>
+    <div class="header-wrap">
+    <div class="app-down fr">
+      <img src="images/indexicons/header_app.png">
+    </div>
+    <div class="logo">
+    </div>    
+    </div>
+  </header>
+  <script type="text/template" id="tpl">
+         <%=name%>
+  </script>
+
+  <section class="coupond-detail">
+    <p>--点餐前出示手机优惠券同样享受优惠--</p>
+    <div class="out-wrap">
+    </div>
+  </section>
+
+  <script type="text/template" id="tpl-detail">
+  <%for(var i = 0; i < result.length;i++){%>
+    <div class="coupon-img-wrap">
+        <div>
+          <div class="pro-img-wrap fl">
+           <!--  <img src="../images/cut.png"> -->
+           <%=result[i].couponProductImg%>
+          </div>
+          <div class="right-txt">
+            <p> 
+              <%=result[i].couponProductName%>
+            </p>
+            <p class="right-price"><%=result[i].couponProductPrice%></p>
+          </div>
+        </div>
+        <p class="time"><%=result[i].couponProductTime%></p>
+      </div>
+    <%}%>
+  </script>
+  <div class="modal">
+    <div class="outer">
+      <div class="hourse">
+        <!-- <img src="../images/cut.png"> -->
+      </div>
+      <div class="arrow clearfix">
+        <div class="left fl">
+          <div class="left-arrow"></div>
+        </div>
+        <div class="right fr">
+          <div class="right-arrow"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <div class="foot-list clearfix">
+      <div class="foot-item">
+        <button>登录</button>
+      </div>
+      <div class="foot-item">
+        <button>注册</button>
+      </div> 
+      <div class="foot-item">
+        <button>返回顶部</button>
+      </div>
+    </div>
+    <div class="copyRight"> 
+      <p><span>手机APP下载</span>慢慢买手机版--掌上比价平台</p>
+      <p>m.manmanbuy.com</p>
+    </div>
+  </footer>
+  <script type="text/javascript">
+    var outWrap = document.querySelector(".out-wrap");
+    (function(){
+      var id = $.getUrlParam('id');
+      var name = $.getUrlParam("name");
+      var obj = {
+        name :name
+      };
+      var logo = document.querySelector(".logo");
+      Route.getcoupolist(function(data){
+      template.config("escape", false);
+      var str = template("tpl-detail",data); 
+      var str1 = template("tpl",obj);
+      console.log(str1);
+      outWrap.innerHTML = str;
+      logo.innerHTML = str1;
+      },id)
+    })();
+
+    // 轮播图
+
+
+    (function(){
+
+      var modal = document.querySelector(".modal");
+      // console.log(modal);
+      var left = document.querySelector(".left");
+      var right = document.querySelector(".right");
+      var hourse = document.querySelector(".hourse");
+      outWrap.addEventListener("click",function(event){
+
+          modal.style.display = "block";
+          // modal.innerHTML = "";
+          var str = event.target;
+          // console.log(str);
+          var str1 = str.cloneNode(true);
+          hourse.appendChild(str1);
+          // 向右的箭头
+          right.addEventListener("click",function(e){
+              var nextNode = ($(str).parent().parent().parent().next().children("div").children(".pro-img-wrap").children());
+              // console.log(nextNode);
+               var newNode = nextNode[0].cloneNode(true);
+               // console.log(newNode); 
+               hourse.innerHTML = "";
+               hourse.appendChild(newNode);
+               str = nextNode;
+               // console.log($that);
+
+          })
+
+
+      })
+
+    })();
+  </script>
+</body>
+</html>

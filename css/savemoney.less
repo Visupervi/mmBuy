@@ -1,0 +1,122 @@
+@import url(commen.less);
+
+// 省钱控header设计
+.header-wrap{
+  // padding: 0;
+  & .logo{
+    text-align: center;
+    margin-right: 2.0rem;
+    color: @white;
+    margin: 0 auto;
+    // padding: 0;
+  }
+}
+
+// 折扣部分
+
+.discount-list{
+  margin-top: 0.25rem;
+  background-color: @white;
+  & .discount-heasder{
+    height: 1.75rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    background-color:@color;
+    & .discount-txt{
+      line-height: 1.75rem;
+      color: @white;
+      width: 90%;
+    }
+    & .discount-icon{
+      line-height: 1.75rem;
+      // vertical-align: middle;
+      // text-align: center;
+      margin-top: 0.375rem;
+      margin-right: -0.75rem;
+      width: 10%;
+      & img{
+        width: 1.0rem;
+        height: 1.0rem;
+      }
+    }
+  }
+
+  & .discount-detail{
+    background-color: @white;
+    width: 100%;
+    & li{
+      border-bottom:2px solid @bgcolor;
+    }
+    & .discount-pic{
+      width: 5.75rem;
+      height: 6.5rem;
+      padding: 0.5rem;
+      box-sizing: border-box;
+      float: left;
+      & img{
+        width: 100%;
+      }
+    }
+    & .discount-info{
+      padding:0.5rem;
+      box-sizing: border-box;
+      // width: 100%;
+      height: 6.5rem;
+      margin-left: 5.75rem;
+      font-size: 0.75rem;
+      color:#000;
+      // line-height: 0.75rem;
+      // background-color:@color;
+      & .price{
+        color:@font-red;
+      }
+    }
+  }
+  & .discount-more{
+    padding: 0.5rem;
+    & button{
+      width: 100%;
+      height: 1.625rem;
+      border-radius: 0.25rem;
+      background:@bgcolor;
+      border:1px solid @bgcolor;
+      outline-style: none;
+      font-size: 0.625rem;
+      font-weight: 600;
+    }
+  }
+
+  & .page{
+    // background: @bgcolor;
+    text-align: center;
+    padding:0.5rem;
+    box-sizing: border-box;
+    height: 2.25rem;
+    // vertical-align: middle;
+    & button{
+      height: 1.25rem;
+      display:inline;
+      margin-right: 0.75rem;
+      margin-left: 0.75rem;
+      outline-style: none;
+    }
+    & select{
+      height: 1.25rem;
+      width: 3.75rem;
+      padding: 0.25rem;
+      text-align: center;
+      outline-style: none;
+      // margin-top: -0.2zrem;
+      & option{
+        outline-style: none;
+        text-align: center;
+      }
+    }
+  }
+  // & .discount-more{
+  //   padding: 0.5rem;
+  //   & button{
+  //     width: 100%;
+  //   }
+  // }
+}

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <link rel="stylesheet" type="text/css" href="../css/init.css">
+  <link rel="stylesheet" type="text/css" href="../css/index.css">
+  <script type="text/javascript" src="../js/rem.js"></script>
+</head>
+<body>
+  <header>
+    <div class="header-wrap">
+       <div class="logo fl">
+         <img src="../images/indexicons/header_logo.png">
+       </div>
+       <div class="app-down fr">
+         <img src="../images/indexicons/header_app.png">
+       </div>
+    </div>
+    <div class="search">
+      <input class="search-ipt fl" type="search" placeholder="请输入你想你家的产品" />
+      <input class="search-btn fr" type="button" value="搜索" />
+    </div>
+  </header>
+  <nav class="menu">
+  </nav>
+  <script type="text/template" id="tpl">
+  <%for(var j = 0;j<3;j++){%>
+    <%if(j==0){%>
+      <%i=4%>
+      <div class="row clearfix row<%=j%>">
+    <%}%>
+    <%if(j==1){%>
+      <%i=8%>
+      <div class="row clearfix row<%=j%>">
+    <%}%>
+    <%if(j==2){%>
+      <%i=result.length%>
+      <div class="row clearfix row<%=j%>" style="display: none">
+    <%}%>
+    <!-- <div class="row clearfix">     -->
+      <%for(var k = i-4;k < i;k++){%>
+      <div class="item fl item<%=k%>">
+        <a href="<%=result[k].titlehref%>">
+          <div class="img-wrap">
+            <%=result[k].img%>
+          </div>
+          <p><%=result[k].name%></p>
+        </a>
+      </div>
+      <%}%>
+    </div>
+  <%}%>
+  </script>
+  <section class="discount-list">
+    <div class="discount-heasder clearfix">
+      <div class="discount-txt fl">
+        超值折扣推荐
+      </div>
+      <div class="discount-icon fr">
+        <img src="images/icons/more.png">
+      </div>
+    </div>
+    <div class="discount-detail">
+      <ul>
+      </ul>
+      <script type="text/template" id="tplDetail">
+        <%for(var i = 0;i<result.length;i++){%>
+        <li>
+          <a href="inlinediscount.html?id=<%=result[i].productId%>">
+            <div class="discount-pic">
+              <%=result[i].productImgSm%>
+            </div>
+            <div class="discount-info">
+              <p class="discount-title"><%=result[i].productName%></p>
+              <p class="price"><%=result[i].productPinkage%></p>
+              <p>
+                <span class="source"><%=result[i].productFrom%> | <%=result[i].productTime%></span>
+                <span class="count fr"><%=result[i].productComCount%></span>
+              </p>
+              </div>
+          </a>
+         </li>
+        <%}%>
+
+      </script>
+    </div>
+    <div class="discount-more">
+       <button>更多优惠信息 >> </button>
+    </div>
+    <div class="discount-heasder clearfix">
+      <div class="discount-txt fl">
+        品牌排行
+      </div>
+      <div class="discount-icon fr">
+        <img src="images/icons/more.png">
+      </div>
+  </section>
+  <footer>
+    <div class="foot-list clearfix">
+      <div class="foot-item">
+        <button>登录</button>
+      </div>
+      <div class="foot-item">
+        <button>注册</button>
+      </div> 
+      <div class="foot-item">
+        <button>返回顶部</button>
+      </div>
+    </div>
+    <div class="copyRight"> 
+      <p><span>手机APP下载</span>慢慢买手机版--掌上比价平台</p>
+      <p>m.manmanbuy.com</p>
+    </div>
+  </footer>
+
+  <script type="text/javascript" src="../js/jquery-1.12.4.js"></script>
+  <script type="text/javascript" src="../js/art/template-native.js"></script>
+  <script type="text/javascript" src="../js/MLRoute.js"></script>
+  <script type="text/javascript">
+    // 初始化数据
+    // 请求菜单栏数据
+    var footItems = document.querySelectorAll(".foot-item");
+    var menu = document.querySelector(".menu");
+(function(){
+      
+      Route.getindexmenu(function(data){
+        template.config("escape", false); 
+        var str = template("tpl",data);
+        menu.innerHTML = str;
+    })
+    })();
+  
+    // 请求折价部分数据
+    (function(){
+      var detail = document.querySelector(".discount-detail");
+      var oUl = detail.querySelector("ul");
+      Route.getmonetctrl(function(data){
+      var str = template("tplDetail",data);
+      oUl.innerHTML = str;
+      })
+      })();
+    
+    // 点击返回顶部
+    (function(){
+          footItems[2].addEventListener("click",function(){
+         document.body.scrollTop=0;
+        })
+        })();
+   
+    (function(){
+      var flag = false;
+      $(menu).on("click",".item7",function(event){
+      if(flag == false){
+          $(this).parent().next().css({"display":"block"});
+        }else{
+           $(this).parent().next().css({"display":"none"});
+        }
+        flag = !flag;
+    })
+    })();
+
+//页面跳转
+
+  (function(){
+    var discountMore = document.querySelector(".discount-more");
+    var btn = discountMore.querySelector("button");
+    btn.addEventListener("click",function(event){
+    window.location.href="moneyctrl.html";
+
+    })
+  })();
+  </script>
+</body>
+</html>

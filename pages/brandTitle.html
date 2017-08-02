@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" type="text/css" href="../css/init.css">
+  <link rel="stylesheet" type="text/css" href="../css/commen.css">
+  <link rel="stylesheet" type="text/css" href="../css/brandTitle.css">
+  <script type="text/javascript" src="../js/rem.js"></script>
+  <script type="text/javascript" src="../js/jquery-1.12.4.js"></script>
+   <script type="text/javascript" src="../js/MLRoute.js"></script>
+   <script type="text/javascript" src="../js/art/template-native.js"></script>
+</head>
+<body>
+  <header>
+    <div class="header-wrap">
+       <div class="logo fl">
+         <img src="../images/indexicons/header_logo.png">
+       </div>
+       <div class="app-down fr">
+         <img src="../images/indexicons/header_app.png">
+       </div>
+    </div>
+    <div class="search">
+      <input class="search-ipt fl" type="search" placeholder="请输入你想你家的产品" />
+      <input class="search-btn fr" type="button" value="搜索" />
+    </div>
+  </header>
+  <nav class="bread-nav clearfix ">
+    <div class="bread-list">
+      <a href="index.html">首页</a><i>></i>
+      <a href="getcategory.html">全部分类</a><i>></i>
+    <!--   <a href="">某个品牌</a> -->
+    </div>
+    <div class="select-btn fr">
+      <button>筛选</button>
+    </div>
+  </nav>
+  <div class="hot-brand">
+    <div class="hot-tit">
+      热门品牌排行
+    </div>
+  </div>
+  <section class="brand-tit">
+    <!-- <a href="">平板电视十大品牌</a> -->
+  </section>
+  <script type="text/template" id="tpl">
+    <%for(var i = 0;i < result.length;i++){%>
+      <a href="brandDetail.html?id=<%=result[i].brandTitleId%>"><%=result[i].brandTitle%></a>
+    <%}%>
+  </script>
+  <footer>
+    <div class="foot-list clearfix">
+      <div class="foot-item">
+        <button>登录</button>
+      </div>
+      <div class="foot-item">
+        <button>注册</button>
+      </div> 
+      <div class="foot-item">
+        <button>返回顶部</button>
+      </div>
+    </div>
+    <div class="copyRight"> 
+      <p><span>手机APP下载</span>慢慢买手机版--掌上比价平台</p>
+      <p>m.manmanbuy.com</p>
+    </div>
+  </footer>
+  <script type="text/javascript">
+    (function(){
+      var brandTit = document.querySelector(".brand-tit");
+      // console.log(brandTit);
+      Route.getbrandtitle(function(data){
+        console.log(data);
+        var str = template("tpl",data);
+        // console.log(str);
+        brandTit.innerHTML = str;
+      })
+    })();
+  </script>
+</body>
+</html>

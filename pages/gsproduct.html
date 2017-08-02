@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href="../css/init.css">
+  <link rel="stylesheet" type="text/css" href="../css/gsproduct.css">
+  <script type="text/javascript" src="../js/rem.js"></script>
+  <script type="text/javascript" src="../js/jquery-1.12.4.js"></script>
+  <script type="text/javascript" src="../js/MLRoute.js"></script>
+  <script type="text/javascript" src="../js/art/template-native.js"></script>
+  <title>Document</title>
+</head>
+<body>
+  <header>
+    <div class="header-wrap">
+    <div class="app-down fr">
+      <img src="images/indexicons/header_app.png">
+    </div>
+       <div class="logo">
+        凑单品
+       </div>      
+    </div>
+  </header>
+  <div class="form-area">
+    <div class="right fr">
+      <div class="icon-menu">
+        
+      </div>
+      <div class="icon-seach"></div>
+    </div>
+    <div class="left">
+      <a class="shop-name" href="javascript:;">京东</a>
+      <a class="shop-area" href="javascript:;">华北</a>
+      <a href="javascript:;">全部商品</a>
+    </div>
+  </div>
+  <div class="js-shop-list">
+    <!-- <ul class="js-shop-list">
+      <li class="active">京东</li>
+      <li>一号店</li>
+    </ul> -->
+  </div>
+  <script type="text/template" id="tpl-shop">
+    <ul>
+      <%for(var i = 0;i < result.length;i++){%>
+        <li data-id = <%=result[i].shopId%>><%=result[i].shopName%></li>
+      <%}%>
+    </ul>
+  </script>
+  <div class="js-area-list">
+     <!--  <ul>
+        <li>华北</li>
+      </ul> -->
+  </div>
+  <script type="text/template" id="tpl-area">
+    <ul>
+      <%for(var i = 0;i < result.length;i++){%>
+        <li data-areaid=<%=result[i].areaId%>><%=result[i].areaName%></li>
+      <%}%>
+    </ul>
+  </script>
+
+  <section class="product clearfix">
+    <div class="t-product-wrap fl">
+      <div class="product-wrap">
+        <img src="../images/cut.png">
+      </div>
+      <div class="pro-info">
+        <p class="pro-title one-txt-cut">廿一客(21cake)专用餐具 1人份(不单独配送)</p>
+        <p class="pro-buy">¥0.50 <span class="fr">去凑单</span></p>
+      </div>
+    </div>
+    <div class="t-product-wrap fl">
+      <div class="product-wrap">
+        <img src="../images/cut.png">
+      </div>
+      <div class="pro-info">
+        <p class="pro-title one-txt-cut">廿一客(21cake)专用餐具 1人份(不单独配送)</p>
+        <p class="pro-buy">¥0.50 <span class="fr">去凑单</span></p>
+      </div>
+    </div>
+  </section>
+
+  <script type="text/template" id="tpl-pro">
+  <%for(var i = 0; i < result.length;i++ ){%>
+    <div class="t-product-wrap fl">
+      <div class="product-wrap">
+        <img src="<%=result[i].productImg%>">
+      </div>
+      <div class="pro-info">
+        <p class="pro-title one-txt-cut"><%=result[i].productName%></p>
+        <p class="pro-buy"><%=result[i].productPrice%> <span class="fr">去凑单</span></p>
+      </div>
+    </div>
+    <%}%>
+  </script>
+  <footer>
+    <div class="foot-list clearfix">
+      <div class="foot-item">
+        <button>登录</button>
+      </div>
+      <div class="foot-item">
+        <button>注册</button>
+      </div> 
+      <div class="foot-item">
+        <button>返回顶部</button>
+      </div>
+    </div>
+    <div class="copyRight"> 
+      <p><span>手机APP下载</span>慢慢买手机版--掌上比价平台</p>
+      <p>m.manmanbuy.com</p>
+    </div>
+  </footer>
+</body>
+<script type="text/javascript">
+(function(){
+  var left = document.querySelector(".left");
+  var alen = left.querySelectorAll("a");
+  var shopList = document.querySelector(".js-shop-list");
+  var areaList = document.querySelector(".js-area-list");
+  var flag = false;
+  var f = false;
+  alen[0].addEventListener("click",function(e){
+    if(!flag){
+       Route.getgsshop(function(data){
+        var str = template("tpl-shop",data);
+        shopList.innerHTML = str;
+    })
+    }else{
+      shopList.innerHTML="";
+    }
+    flag = !flag;
+  })
+  alen[1].addEventListener("click",function(event){
+    if(!f){
+       Route.getgsghoparea(function(data){
+        var str1 = template("tpl-area",data);
+        areaList.innerHTML = str1;
+        // areaList.classList.add("show");
+    })
+     }else{
+      areaList.innerHTML = "";
+     }
+     f =!f
+  })
+  // console.log(alen);
+  // console.log(areaList);
+  // left.addEventListener("click",function(e){
+  //   var obj = e.target;
+  //   if(e.target.className === "shop-name"){
+  //      Route.getgsshop(function(data){
+  //       var str = template("tpl-shop",data);
+  //       console.log(str);
+  //       shopList.innerHTML = str;
+  //       shopList.classList.add("show");
+  //       obj.classList.add("flag");
+  // })
+  //   }else if(e.target.className ==="shop-area"){
+  //      Route.getgsghoparea(function(data){
+  //       var str1 = template("tpl-area",data);
+  //       areaList.innerHTML = str1;
+  //       areaList.classList.add("show");
+
+  //   })
+
+  //   }
+
+  //   if(e.target.classList.contains("flag") && e.target.classList.contains("shop-name")){
+  //     shopList.classList.remove("show");
+  //     shopList.style.dispaly = "none;"
+  //     obj.classList.remove("flag");
+  //     console.log(111);
+  //   }
+  //   // console.log(typeof e.target);
+    
+  // })
+
+ 
+
+})();
+
+(function(){
+  var product = document.querySelector(".product");
+Route.getgsproduct(function(data){
+  console.log(data);
+  var str = template("tpl-pro",data);
+  // console.log(str);
+  product.innerHTML = str;
+},0,0)
+})();
+ 
+</script>
+</html>

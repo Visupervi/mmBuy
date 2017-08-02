@@ -1,0 +1,159 @@
+@import url(commen.less);
+.header-wrap{
+  // padding: 0;
+  background-color: @color;
+  & .logo{
+    text-align: center;
+    margin-right: 2.0rem;
+    color: @white;
+    margin: 0 auto;
+    // padding: 0;
+  }
+}
+
+// 商品来源区域设计
+
+.form-area{
+  height: 1.95rem;
+  background-color: #fff;
+  border-bottom: 1px solid #ccc;
+  .right{
+    position: relative;
+    width: 2.25rem;
+    height: 1.875rem;
+      // border-bottom: 1px solid #ccc;
+    // background-color: #ccc;
+    // background-color: red;
+    
+    .icon-menu{
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      -webkit-transform: translate(-50%,-50%);
+      background: url(../images/icon_bar.png) no-repeat;
+      background-size: 11.0rem 6.6rem;
+      width: 0.875rem;
+      height: 1.125rem;
+      background-position: -0.525rem -2.9rem;
+    }
+  .icon-seach{
+    background: url(../images/icon_bar.png) no-repeat;
+    background-size: 11.0rem 6.6rem;
+    background-position: -2.4rem -0.2rem;
+    width: 0.75rem;
+    height: 0.75rem;
+    position: absolute;
+    top: 0.3rem;
+    left: 50%;
+    background-color: @white;
+  }
+
+  }
+  .left{
+      // border-bottom: 1px solid #ccc;
+    height: 1.9rem;
+    margin-right: 2.25rem;
+    // background-color: pink;
+    // border-left:1px solid #ccc;
+    text-indent: 0.5rem;
+    border-right: 1px solid #ccc;
+    a{
+      display: block;
+      color: #000;
+      width: 31.7%;
+      float: left;
+      margin-right: 0.25rem;
+      height: 1.9rem;
+      line-height: 1.9rem;
+      font-size: 0.75rem;
+    }
+  }
+}
+
+
+// area-list部分
+
+.js-shop-list{
+  background-color: #fff;
+  // display: none;
+   ul li{
+    border-bottom: 1px solid #ccc;
+    height: 2.0rem;
+    text-align: left;
+    text-indent: 0.5rem;
+    line-height: 2.0rem;
+    font-size: 0.8rem;
+  }
+  .active{
+    background-color: pink;
+  }
+  .show{
+    display: block;
+  }
+  .hide{
+    display: none;
+  }
+}
+.js-area-list{
+  background-color: #fff;
+  ul li{
+    border-bottom: 1px solid #ccc;
+    height: 2.0rem;
+    text-align: left;
+    text-indent: 0.5rem;
+    line-height: 2.0rem;
+    font-size: 0.8rem;
+  }
+  .active{
+    background-color: pink;
+  }
+  .show{
+    display: block;
+  }
+  .hide{
+    display: none;
+  }
+}
+
+// section 部分设计
+.product{
+  padding: 0.25rem;
+  box-sizing: border-box;
+  .t-product-wrap{
+    width: 50%;
+    background-color: #fff;
+    height: 11.825rem;
+    padding: 0.25rem;
+    box-sizing: border-box;
+    // margin-right: 0.25rem;
+    border: 0.125rem solid #eee;
+    margin-bottom: 0.25rem;
+    .product-wrap{
+      // height: 8.75rem;
+
+      height: 8.75rem;
+      img{
+        width: 100%;
+      }
+    }
+    .pro-info{
+      .pro-title{
+        font-size: 0.7rem;
+      }
+      .pro-buy{
+        color: red;
+        span {
+            background-color: @color;
+            color: @white;
+            border-radius: 0.2rem;
+            font-size: 0.75rem;
+            height: 1.375rem;
+            width: 3.875rem;
+            text-align: center;
+            line-height: 1.375rem;
+        }
+      }
+    }
+  }
+}
+

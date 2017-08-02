@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <link rel="stylesheet" type="text/css" href="../css/init.css">
+  <link rel="stylesheet" type="text/css" href="../css/getcategory.css">
+   <script type="text/javascript" src="../js/rem.js"></script>
+   <script type="text/javascript" src="../js/MLRoute.js"></script>
+</head>
+<body>
+  <header>
+    <div class="header-wrap">
+       <div class="logo fl">
+         <img src="images/indexicons/header_logo.png">
+       </div>
+       <div class="app-down fr">
+         <img src="images/indexicons/header_app.png">
+       </div>
+    </div>
+    <div class="search">
+      <input class="search-ipt fl" type="search" placeholder="请输入你想你家的产品" />
+      <input class="search-btn fr" type="button" value="搜索" />
+    </div>
+  </header>
+  <section class="category-list">
+    <ul>
+    </ul>
+    <script type="text/template" id="tpl-title">
+      
+      <%for(var i = 0;i < result.length;i++){%>
+      <div class="list-item" data-id=<%=result[i].titleId%>>
+        <li>
+          <a href="javascript:;">
+            <%=result[i].title%>
+            <span class="fr">点击查看详情</span>
+          </a>
+        </li>
+        <div class="clearfix category-item">
+        </div>
+      </div>
+      <%}%>
+      </script>
+      <script type="text/template" id="tpl-detail">
+        <%for(var i = 0;i < result.length;i++){%>
+          <a data-id=<%=result[i].categoryId%> href="action.html?id=<%=result[i].categoryId%>&titleId=<%=result[i].titleId%>"><%=result[i].category%></a>
+        <%}%>
+      </script>
+  </section>
+  <footer>
+    <div class="foot-list clearfix">
+      <div class="foot-item">
+        <button>登录</button>
+      </div>
+      <div class="foot-item">
+        <button>注册</button>
+      </div> 
+      <div class="foot-item">
+        <button>返回顶部</button>
+      </div>
+    </div>
+    <div class="copyRight"> 
+      <p><span>手机APP下载</span>慢慢买手机版--掌上比价平台</p>
+      <p>m.manmanbuy.com</p>
+    </div>
+  </footer>
+  <script type="text/javascript" src="../js/jquery-1.12.4.js"></script>
+  <script type="text/javascript" src="../js/art/template-native.js"></script>
+  <script type="text/javascript">
+   var categoryList = document.querySelector(".category-list") ;
+   var oUl = categoryList.querySelector("ul");
+
+   (function(){
+     Route.getcategorytitle(function(data){
+      //dataResul  = data;
+      var str = template("tpl-title",data);
+      oUl.innerHTML = str;
+    })
+   })();
+
+   (function(){
+     $(oUl).on("click",".list-item",function(event){
+      var $id = $(this).attr("data-id");
+      var wrap = $(this).children(".category-item");
+
+      // 自定义个类，用来判断是否点击过当前元素
+      if(wrap.hasClass("catgory-play")){
+            wrap.removeClass("catgory-play");
+            wrap.css({"display":"none"})
+            }else{
+            wrap.addClass("catgory-play");
+            wrap.css({"display":"block"});
+          }
+        Route.getcategory(function(data){
+        var str = template("tpl-detail",data);
+        wrap.html(str);
+      },$id);
+    });
+   })();
+
+  </script>
+</body>
+</html>

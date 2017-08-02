@@ -1,0 +1,103 @@
+@import url(commen.less);
+.detail-list{
+  background-color: @white;
+  & .product{
+      text-align: center;
+    & p{
+      font-size: 0.75rem;
+      // text-align: center;
+      width: 90%;
+      text-align: center;
+      margin: 0 auto;
+      display: inline-block;
+    }
+    & .product-img{
+      padding: 0.5rem 4.0rem 0.5rem 4.0rem;
+      // height: 5.0rem;
+      box-sizing:content-box;
+      img{
+        width: 100%;
+      }
+    }
+    & .product-info{
+      text-align: center;
+      background: @color;
+      border: 1px solid #ccc;
+      border-right: none;
+      & .items{
+        width: 33%;
+        float: left;
+        height: 1.5rem;
+        line-height: 1.5rem;
+        font-size: 0.65rem;
+        border-right: 1px solid #ccc;
+      }
+    }
+    & .product-sorce{
+      // & td{
+      //   height: 0.75rem;
+      // }
+      font-size: 0.7rem;
+      & .red{
+        color: @font-red;
+      }
+      & a{
+        color: #000;
+      }
+      & .p_pic{
+        text-align: center;
+        & img{
+          display: inline-block;
+        }
+      }
+    }
+  & .derection{
+    border-top: 1px solid #ccc;
+    font-size: 0.5rem;
+    color: #ccc;
+  }
+  & .comment{
+    & .comment-head{
+      height: 1.25rem;
+      background-color: #eaeaea;
+      font-size: 0.68rem;
+      line-height: 1.25rem;
+    }
+    background-color: @white;
+    & .comment-content{
+      border-top: 1px solid #ccc;
+      & .content-items{
+        & .user-info{
+          width: 50%;
+          margin-top:0.625rem;
+          & p{
+            text-align: left;
+          }
+        }
+        & .from-info{
+          width: 50%;
+          & p{
+            text-align: right;
+          }
+        }
+        padding: 0.25rem;
+        // height: 1.0rem;
+        line-height: 1.0rem;
+        vertical-align: middle;
+        // box-sizing: border-box;
+        font-size: 0.5rem;
+        & p{
+           font-size: 0.5rem;
+           // display: block;
+        }
+      }
+      & .comment-txt{
+        font-size:0.5rem;
+        padding: 0.5rem;
+    }
+      
+  }
+
+  }
+}
+}

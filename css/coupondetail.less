@@ -1,0 +1,120 @@
+@import url(commen.less);
+
+body{
+  position: relative;
+}
+.header-wrap{
+  // padding: 0;
+  background-color: #f4483e;
+  & .logo{
+    text-align: center;
+    margin-right: 2.0rem;
+    color: @white;
+    margin: 0 auto;
+    // padding: 0;
+  }
+}
+
+.coupond-detail{
+  background-color: #fff;
+  padding: 0.25rem;
+  box-sizing: border-box;
+  > p{
+    font-size: 0.7rem;
+    text-align: center;
+    color: #ccc;
+    // font-family: "Microsoft Yahei";
+  }
+  .coupon-img-wrap{
+    border-bottom: 1px solid #ccc;
+    padding: 0.25rem;
+    .time{
+      font-size: 0.75rem;
+      color: #ed5f09;
+      text-align: center;
+    }
+    .pro-img-wrap{
+      height: 4.0rem;
+      width: 5.0rem; 
+      img{
+        width: 100%;
+      }
+    }
+    .right-txt{
+      height: 5.0rem;
+      margin-left: 5.25rem;
+      p{
+        font-size: 0.70rem;
+        font-weight: 600;
+        // text-align: center;s
+      }
+      .right-price{
+        margin-top: 0.5rem;
+        font-size: 1.0rem;
+        font-weight: 700;
+      }
+      // background-color: red;
+    }
+  }
+}
+
+// 模态框
+
+.modal{
+  position: absolute;
+  top: 0;
+  // left: 50%;
+  width: 100%;
+  height: 100%;
+  z-index: 10000;
+  display: none;
+  background-color: rgba(0,0,0,0.5);
+  .hourse{
+    position: absolute;
+    width: 6.0rem;
+    height:5.0rem;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%,-50%);
+    img{
+      width: 100%;
+    }
+    // background-color: red; 
+  }
+  .arrow{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 9.0rem;
+    -webkit-transform: translate(-50%,-50%);
+    .right,.left{
+      width:1.5rem;
+      height:3rem;
+      // position: absolute;
+      // line-height: 3rem;
+      .right-arrow,.left-arrow{
+        background: url("../images/icon_bar.png") no-repeat;
+        background-size: 11.0rem 6.6rem;
+        width: 0.65rem;
+        height: 1.25rem;
+        margin: 0 auto;
+        margin-top: 50%;
+      }
+      background-color: rgba(0,0,0,0.7);
+      border-radius: 0.2rem;
+      .left-arrow{
+        background-position: -5.15rem -0.5rem;
+        vertical-align: middle;
+    
+    }
+    .right-arrow{
+      background-position: -5.15rem -0.5rem;
+      vertical-align: middle;
+      -webkit-transform: rotate(180deg);
+  
+    }
+    }
+    
+  }
+
+}

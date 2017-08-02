@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href="../css/init.css">
+  <link rel="stylesheet" type="text/css" href="../css/savemoney.css">
+  <script type="text/javascript" src="../js/rem.js"></script>
+  <script type="text/javascript" src="../js/art/template-native.js"></script>
+   <script type="text/javascript" src="../js/jquery-1.12.4.js"></script>
+    <script type="text/javascript" src="../js/MLRoute.js"></script>
+  <title>Document</title>
+
+</head>
+<body>
+
+<!-- 重写头部，改成右边固定，左侧自适应，原理先写浮动元素，然后写标准流元素，让左侧margin-right右边盒子的宽度就行 -->
+  <header>
+    <div class="header-wrap">
+    <div class="app-down fr">
+      <img src="images/indexicons/header_app.png">
+    </div>
+       <div class="logo">
+        省钱控-最新优惠
+       </div>
+       
+    </div>
+  </header>
+  <section class="discount-list">
+    <div class="discount-detail">
+    <ul class="save-pro-wrap">
+       <!--  <li>
+          <a href="">
+            <div class="discount-pic">
+              <img src="http://cacheimg.manmanbuy.com/r_img/cacheimg.aspx?width=600&amp;imgurl=http://a.manmanbuy.com:8013/cuxiaoPic/201610/201610001412282758.jpg" alt="移动端凑单品：海天 鲜味 生抽 1.28L">
+            </div>
+            <div class="discount-info">
+              <p class="discount-title">移动端凑单品：海天 鲜味 生抽 1.28L</p>
+              <p class="price">10.9元</p>
+              <p>
+                <span class="source">京东商城 | 10-25 14:10</span>
+                <span class="count fr">1</span>
+              </p>
+              </div>
+          </a>
+         </li> -->
+    </ul>
+    </div>
+    <script type="text/template" id="tpl">
+      <%for(var i = 0;i < result.length;i++){%>
+         <li>
+          <a href="inlinediscount.html?id=<%=result[i].productId%>">
+            <div class="discount-pic">
+              <%=result[i].productImgSm%>
+            </div>
+            <div class="discount-info">
+              <p class="discount-title"><%=result[i].productName%></p>
+              <p class="price"><%=result[i].productPinkage%></p>
+              <p>
+                <span class="source"><%=result[i].productFrom%> | <%=result[i].productTime%></span>
+                <span class="count fr"><%=result[i].productComCount%></span>
+              </p>
+              </div>
+          </a>
+         </li>
+      <%}%>
+    </script>
+  <div class="page">
+    <button>上一页</button>
+    <select name="" id="selectId">
+    </select>
+    <button>下一页</button>
+  </div>
+   <script type="text/template" id="tpl-page">
+    <%for(var j = 0; j < totalCount/pagesize;j++){%>
+      <option value="<%=j%>"><%=j+1%>/<%=Math.ceil(totalCount/pagesize)%></option>
+    <%}%>
+    </script>
+  <div class="discount-more">
+    <button>更多优惠信息 >> </button>
+  </div>
+
+  </section>
+  
+  <footer>
+    <div class="foot-list clearfix">
+      <div class="foot-item">
+        <button>登录</button>
+      </div>
+      <div class="foot-item">
+        <button>注册</button>
+      </div> 
+      <div class="foot-item">
+        <button>返回顶部</button>
+      </div>
+    </div>
+    <div class="copyRight"> 
+      <p><span>手机APP下载</span>慢慢买手机版--掌上比价平台</p>
+      <p>m.manmanbuy.com</p>
+    </div>
+  </footer>
+<script type="text/javascript">
+(function(){
+  var $saveProWrap = $(".save-pro-wrap");
+  var $select = $("#selectId");
+  Route.getmoneyctrllist(function(data){
+    template.config("escape", false);
+    template.helper('Math', Math);
+    var str = template("tpl",data);
+    var str1 = template("tpl-page",data);
+    $saveProWrap.html(str);
+    $select.html(str1);
+    console.log(data);
+  },0)
+})();
+
+  // Route.getmonetctrl(function(data){
+  //   console.log(data);
+  // },10)
+</script>
+</body>
+</html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" type="text/css" href="../css/init.css">
+  <link rel="stylesheet" type="text/css" href="../css/commen.css">
+  <link rel="stylesheet" type="text/css" href="../css/brandDetail.css">
+  <script type="text/javascript" src="../js/rem.js"></script>
+  <script type="text/javascript" src="../js/jquery-1.12.4.js"></script>
+  <script type="text/javascript" src="../js/MLRoute.js"></script>
+  <script type="text/javascript" src="../js/MLTools.js"></script>
+  <script type="text/javascript" src="../js/art/template-native.js"></script>
+</head>
+<body>
+  <header>
+    <div class="header-wrap">
+       <div class="logo fl">
+         <img src="../images/indexicons/header_logo.png">
+       </div>
+       <div class="app-down fr">
+         <img src="../images/indexicons/header_app.png">
+       </div>
+    </div>
+    <div class="search">
+      <input class="search-ipt fl" type="search" placeholder="请输入你想你家的产品" />
+      <input class="search-btn fr" type="button" value="搜索" />
+    </div>
+  </header>
+  <nav class="bread-nav clearfix ">
+    <div class="bread-list">
+      <a href="../index.html">首页</a><i>></i>
+      <a href="getcategory.html">全部分类</a><i>></i>
+    <!--   <a href="">某个品牌</a> -->
+    </div>
+    <div class="select-btn fr">
+      <button>筛选</button>
+    </div>
+  </nav>
+  <div class="hot-brand">
+    <div class="hot-tit">
+      平板电视哪个好
+    </div>
+  </div>
+  <section class="top10">
+    <!-- <a href="">
+      <div class="q-brand">
+        <div class="num fl">1</div>
+        <div class="brandname">"三星液晶电视"</div>
+      </div>
+      <div class="sell-num">
+        "30天全网销售：242408件"
+      </div>
+    </a> -->
+  </section>
+  <script type="text/template" id="tpl">
+    <%for(var i = 0;i < result.length;i++){%>
+    <a data-id=<%=result[i].brandTitleId%> href="javascript:;">
+      <div class="q-brand">
+      <%if(i===0){%>
+        <div style="background-color:red;" class="num fl"><%=i+1%></div>
+      <%}else if(i===1){%>
+        <div style="background-color:#ff9313;" class="num fl"><%=i+1%></div>
+      <%}else if(i===2){%>
+        <div style="background-color:#89df58;" class="num fl"><%=i+1%></div>
+      <%}else{%>
+      <div style="background-color:#ccc;" class="num fl"><%=i+1%></div>
+      <%}%>
+      <div class="brandname"><%=result[i].brandName%></div>
+      </div>
+      <div class="sell-num">
+        <%=result[i].brandInfo%>
+      </div>
+    </a>
+    <%}%>
+  </script>
+  <div class="hot-brand">
+    <div class="hot-tit">
+      平板电视排行榜
+    </div>
+  </div>
+  <section class="ranking-list">
+  </section>
+  <script type="text/template" id="tpl-pro">
+    <%for(var i = 0; i < result.length;i++){%>
+    <a href="productdetail.html?id=<%=result[i].productId%>">
+      <div class="left">
+        <div class="p-wrap-img">
+          <!-- <img src="../images/cut.png"> -->
+
+          <%=result[i].productImg%>
+        </div>
+      </div>
+      <div class="right">
+        <p class="p-tit"><%=result[i].productName%></p>
+        <p class="p-price">
+         <%=result[i].productPrice%>
+        </p>
+        <p class="offer"><span><%=result[i].productQuote%></span><span><%=result[i].productCom%></span></p>
+      </div>
+    </a>
+
+    <%}%>
+  </script>
+
+   <div class="hot-brand">
+    <div class="hot-tit">
+      最新评论
+    </div>
+  </div>
+  <section class="new-com">
+    <!-- <div class="pro-com">
+      <div class="left">
+        <div class="com-img-wrap">
+          <img src="../images/cut.png">
+        </div>
+      </div>
+      <div class="right">
+        <p class="com-tit">"乐视TV(Letv) 超3 X55 55英寸智能LED液晶 超级电视 4K超清电视"
+        </p>
+      </div>
+      <div class="com-txt">
+        <p><span>姓名</span><span>:</span><span class="time">时间ffffffffff</span></p>
+        <div>
+        </div>
+      </div>
+    </div> -->
+  </section>
+
+  <script type="text/template" id="tpl-p-cm">
+    <%for(var i = 0; i < result.length;i++){%>
+    <div class="pro-com">
+      <div class="left">
+        <div class="com-img-wrap">
+          <img src="../images/cut.png">
+        </div>
+      </div>
+      <div class="right">
+        <p class="com-tit">
+          乐视TV(Letv) 超3 X55 55英寸智能LED液晶 超级电视 4K超清电视
+        </p>
+      </div>
+      <div class="com-txt">
+        <p><span><%=result[i].comName%></span><span>:</span><span class="time"><%=result[i].comName%></span></p>
+        <div>
+          <%=result[i].comContent%>
+        </div>
+      </div>
+    </div>
+    <%}%>
+  </script>
+  <footer>
+    <div class="foot-list clearfix">
+      <div class="foot-item">
+        <button>登录</button>
+      </div>
+      <div class="foot-item">
+        <button>注册</button>
+      </div> 
+      <div class="foot-item">
+        <button>返回顶部</button>
+      </div>
+    </div>
+    <div class="copyRight"> 
+      <p><span>手机APP下载</span>慢慢买手机版--掌上比价平台</p>
+      <p>m.manmanbuy.com</p>
+    </div>
+  </footer>
+
+  <script type="text/javascript">
+    var id = $.getUrlParam('id');
+    var dataResult = "";
+    var pid="";
+
+
+    (function(){
+      var top = document.querySelector(".top10");
+      Route.getbrand(function(data){
+        var str = template("tpl",data);
+        top.innerHTML = str;
+      },id)
+    })();
+
+
+    (function(){
+    Route.getbrandlist(function(data){
+        var rankingList = document.querySelector(".ranking-list");
+        template.config("escape", false);
+        var str = template("tpl-pro",data);
+        rankingList.innerHTML = str;
+        pid = data.result[0].productId;
+        Route.getproductcom(function(data){
+          var newCom = document.querySelector(".new-com");
+          var str2 = template("tpl-p-cm",data);
+        // console.log(str2);
+          newCom.innerHTML = str2;
+      },pid);
+    },id)
+
+    })();
+    
+  </script>
+</body>
+</html>

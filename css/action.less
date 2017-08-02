@@ -1,0 +1,100 @@
+@import url(commen.less);
+@import url(index.less);
+
+// // 面包屑导航
+// .bread-nav{
+//   padding: 0.25rem;
+//   box-sizing: border-box;
+//   height: 1.875rem;
+//   line-height: 0.75rem;
+//   background-color: #eee;
+//   border-bottom: 1px solid #ccc;
+//   border-top: 1px solid #ccc;
+//   background-image: linear-gradient(to top ,#ccc ,#fff);
+//   & .bread-list {
+//     float: left;
+//     margin-top: 0.25rem;
+//     & a{
+//     color: #000;
+//     font-size: 0.8rem;
+//     }
+//   }
+//   & .select-btn {
+//    height: inherit;
+//    & button{
+//     background: #ccc;
+//     border: none;
+//     outline-style: none;
+//     height: 1.375rem;
+//     width: 2.5rem;
+//     border-radius: 0.2rem;
+//    }
+//  }
+// }
+
+// 这是详情部分
+.action-list{
+  margin-top: 0.25rem;
+  background-color: @white;
+  & .action-detail{
+    background-color: @white;
+    width: 100%;
+    & li{
+       border-bottom:2px solid @bgcolor;
+    }
+    & .action-pic{
+      width: 5.75rem;
+      height: 6.5rem;
+      padding: 0.5rem;
+      box-sizing: border-box;
+      float: left;
+      & img{
+        width: 100%;
+      }
+    }
+    & .action-info{
+      padding:0.5rem;
+      box-sizing: border-box;
+      // width: 100%;
+      height: 6.5rem;
+      margin-left: 5.75rem;
+      font-size: 0.75rem;
+      color:#000;
+      // line-height: 0.75rem;
+      // background-color:@color;
+      & .price{
+        color:@font-red;
+        font-weight: 500;
+        font-size: 1.0rem;
+      }
+    }
+  }
+  & .page{
+    // background: @bgcolor;
+    text-align: center;
+    padding:0.5rem;
+    box-sizing: border-box;
+    height: 2.25rem;
+    // vertical-align: middle;
+    & button{
+      height: 1.25rem;
+      display:inline;
+      margin-right: 0.75rem;
+      margin-left: 0.75rem;
+      outline-style: none;
+    }
+    & select{
+      height: 1.25rem;
+      width: 3.75rem;
+      padding: 0.25rem;
+      text-align: center;
+      outline-style: none;
+      // margin-top: -0.2zrem;
+      & option{
+        outline-style: none;
+        text-align: center;
+      }
+    }
+  }
+}
+

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <link rel="stylesheet" type="text/css" href="../css/init.css">
+  <link rel="stylesheet" type="text/css" href="../css/action.css">
+  <!-- <link rel="stylesheet" type="text/css" href="../css/index.css"> -->
+   <script type="text/javascript" src="../js/rem.js"></script>
+   <script type="text/javascript" src="../js/MLRoute.js"></script>
+  
+</head>
+<body>
+  <header>
+    <div class="header-wrap">
+       <div class="logo fl">
+         <img src="images/indexicons/header_logo.png">
+       </div>
+       <div class="app-down fr">
+         <img src="images/indexicons/header_app.png">
+       </div>
+    </div>
+    <div class="search">
+      <input class="search-ipt fl" type="search" placeholder="请输入你想你家的产品" />
+      <input class="search-btn fr" type="button" value="搜索" />
+    </div>
+  </header>
+  <nav class="bread-nav clearfix ">
+    <div class="bread-list">
+    </div>
+    <script type="text/template" id="tpl-nav">
+      <a href="index.html">首页</a><i>></i>
+      <a href="category.html">全部分类</a><i>></i>
+      <a href="javascript:;"><%=newData%></a>
+    </script>
+    <div class="select-btn fr">
+      <button>筛选</button>
+    </div>
+  </nav>
+  <section class="action-list">
+  <div class="action-detail">
+    <ul>
+    </ul>
+    <script type="text/template" id="tpl-action">
+      <%for(var i = 0;i < result.length;i++){%>
+        <li>
+          <a href="productdetail.html?id=<%=result[i].productId%>">
+            <div class="action-pic">
+              <!-- <img src="../images/cut.png"> -->
+              <%=result[i].productImg%>
+            </div>
+            <div class="action-info">
+              <p class="action-title"><%=result[i].productName%></p>
+              <p class="price"><%=result[i].productPrice%></p>
+              <p>
+                <span class="source"><%=result[i].productQuote%></span>
+                <span class="count fr"><%=result[i].productCom%></span>
+              </p>
+            </div>
+          </a>
+        </li>
+      <%}%>
+    </script>
+  </div>
+  <div class="page">
+    <button>上一页</button>
+    <select name="" id="selectId">
+    </select>
+    <button>下一页</button>
+  </div>
+  <script type="text/template" id="tpl-page">
+    <%for(var j = 0; j < totalCount/pagesize;j++){%>
+      <option value="<%=j+1%>"><%=j+1%>/<%=Math.ceil(totalCount/pagesize)%></option>
+    <%}%>
+  </script>
+  </section>
+  <footer>
+    <div class="foot-list clearfix">
+      <div class="foot-item">
+        <button>登录</button>
+      </div>
+      <div class="foot-item">
+        <button>注册</button>
+      </div> 
+      <div class="foot-item">
+        <button>返回顶部</button>
+      </div>
+    </div>
+    <div class="copyRight"> 
+      <p><span>手机APP下载</span>慢慢买手机版--掌上比价平台</p>
+      <p>m.manmanbuy.com</p>
+    </div>
+  </footer>
+  <script type="text/javascript" src="../js/art/template-native.js"></script>
+  <script type="text/javascript" src="../js/jquery-1.12.4.js"></script>
+  <script type="text/javascript" src="../js/MLTools.js"></script>
+  <script type="text/javascript">
+    var detail = document.querySelector(".action-detail");
+    var $oUl = detail.querySelector("ul");
+    var $id = $.getUrlParam('id');
+    var btns = $(".page button");
+    var $select = $("#selectId");
+    var resultData ={};
+    var totalCount = 0;
+    var num = 1; 
+    (function(){
+      var $breadList = $(".bread-list");
+      var $tilId = $.getUrlParam("titleId");
+      Route.getproductlist(function(data){
+      resultData = data;
+      totalCount = Math.ceil(resultData.totalCount/resultData.pagesize);
+      // console.log(resultData);
+      template.config("escape", false); 
+      template.helper('Math', Math)
+      var str = template("tpl-action",data);
+      var str1 = template("tpl-page",data);
+      $oUl.innerHTML = str;
+      $select.html(str1);
+      Route.getcategory(function(data){
+        for(var i = 0; i < data.result.length;i++ ){
+          if(resultData.result[0].categoryId === data.result[i].categoryId){
+            var obj={
+              newData:data.result[i].category
+            }
+          }
+        }
+        var str = template("tpl-nav",obj);
+        $breadList.html(str);
+        },$tilId)
+      },$id)
+    })();
+    
+
+  // 分页功能
+  //下一页
+
+  (function(){
+    btns.eq(1).on("click",function(event){
+     num++;
+      var total = Math.ceil(resultData.totalCount/resultData.pagesize);
+      if(num > total){
+        num = total;
+        return false;
+      }
+       var option2 = $("<option selected value=\"+num+\">"+num+"/"+total+"</option>").appendTo($select);
+      Route.getproductlist(function(data){
+        var str = template("tpl-action",data);
+        $oUl.innerHTML = str;
+      },$id,num);
+   })
+     
+  })();
+ 
+
+ (function(){
+    btns.eq(0).on("click",function(event){
+      var total = Math.ceil(resultData.totalCount/resultData.pagesize);
+      num--;
+      if(num < 1) {
+        num = 1;
+        return false;
+      }
+      var option2 = $("<option selected value=\"+num+\">"+num+"/"+total+"</option>").appendTo($select);
+      Route.getproductlist(function(data){
+      var str = template("tpl-action",data);
+      $oUl.innerHTML = str;
+  },$id,num);
+    })
+ })();
+    //上一页 同步option的value值
+    // 给了option value值，所以每一次就可对应value值
+    //调用下一页函数，并且同步num
+
+    (function(){
+      $select.on("click",function(event){
+  // console.log(this.value);
+      num = this.value;
+      var total = Math.ceil(resultData.totalCount/resultData.pagesize);
+      if(num > total){
+        num = total;
+        return false;
+      }
+      Route.getproductlist(function(data){
+        var str = template("tpl-action",data);
+        $oUl.innerHTML = str;
+      },$id,num);
+    })
+    })();
+   
+  </script>
+</body>
+</html>

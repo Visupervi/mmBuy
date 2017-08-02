@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <link rel="stylesheet" type="text/css" href="../css/init.css">
+  <link rel="stylesheet" type="text/css" href="../css/commen.css">
+  <link rel="stylesheet" type="text/css" href="../css/productdetail.css">
+  <script type="text/javascript" src="../js/less.min.js"></script>
+  <script type="text/javascript" src="../js/rem.js"></script>
+  <script type="text/javascript" src="../js/MLRoute.js"></script>
+  <script type="text/javascript" src="../js/jquery-1.12.4.js"></script>
+  <script type="text/javascript" src="../js/MLTools.js"></script>
+  <script type="text/javascript" src="../js/art/template-native.js"></script>
+</head>
+<body>
+  <header>
+    <div class="header-wrap">
+       <div class="logo fl">
+         <img src="images/indexicons/header_logo.png">
+       </div>
+       <div class="app-down fr">
+         <img src="images/indexicons/header_app.png">
+       </div>
+    </div>
+    <div class="search">
+      <input class="search-ipt fl" type="search" placeholder="请输入你想你家的产品" />
+      <input class="search-btn fr" type="button" value="搜索" />
+    </div>
+  </header>
+  <nav class="bread-nav clearfix ">
+    <div class="bread-list">
+      <a href="index.html">首页</a><i>></i>
+      <a href="getcategory.html">电视</a><i>></i>
+      <a href="">某个品牌</a>
+    </div>
+    <div class="select-btn fr">
+      <button>筛选</button>
+    </div>
+  </nav>
+
+  <section class="detail-list">
+    <div class="product">
+    <!-- 商品详情区 -->
+      <div class="product-wrap">
+      </div>
+
+      <!-- 中间分区 -->
+      <div class="derection">
+          *实际价格以各网站售价为准*实际价格以各网站售价为准*实际价格以各网站售价为准*实际价格以各网站售价为准
+      </div>
+
+      <!-- 评论区 -->
+      <div class="comment">
+        <div class="comment-head">网友评价</div>
+        <div class="content-wrap"></div>
+      </div>
+    </div>
+  </section>
+  <script type="text/template" id="tpl-com">
+    <%for(var i = 0; i< result.length;i++){%>
+    <div class="comment-content">
+      <div class="content-items clearfix">
+        <div class="fl user-info">
+          <p class="username"><%=result[i].comName%></p>
+        </div>
+        <div class="fr from-info">
+          <p class="data"><%=result[i].comTime%></p>
+          <p class="from"><%=result[i].comFrom%></p>
+        </div>
+      </div>
+      <div class="comment-txt">
+      <%=result[i].comContent%>
+      </div>
+    </div>
+    <%}%>
+  </script>
+  <script type="text/template" id="tpl-pro">
+     <p><%=result[0].productName%></p>
+        <div class="product-img">
+          <%=result[0].productImg%>
+        </div>
+        <div class="product-info clearfix">
+          <div class="items">比价购买</div>
+          <div class="items">产品参数</div>
+          <div class="items">评价(100000)</div>
+        </div>
+        <div class="product-sorce">
+          <%=result[0].bjShop%>
+        </div>
+  </script>
+  <footer>
+    <div class="foot-list clearfix">
+      <div class="foot-item">
+        <button>登录</button>
+      </div>
+      <div class="foot-item">
+        <button>注册</button>
+      </div> 
+      <div class="foot-item">
+        <button>返回顶部</button>
+      </div>
+    </div>
+    <div class="copyRight"> 
+      <p><span>手机APP下载</span>慢慢买手机版--掌上比价平台</p>
+      <p>m.manmanbuy.com</p>
+    </div>
+  </footer>
+  <script type="text/javascript">
+   var $id = $.getUrlParam('id');
+   
+   // console.log($contentWrap);
+
+   (function(){
+    var $productWrap = $(".product-wrap");
+     Route.getproductdetail(function(data){
+      // console.log(data);
+      template.config("escape", false); 
+      var str1 = template("tpl-pro",data);
+      // console.log(str1);
+      $productWrap.html(str1);
+    },$id)
+   })();
+   (function(){
+    var $contentWrap = $(".content-wrap");
+    Route.getproductcom(function(data){
+     var str = template("tpl-com",data);
+     $contentWrap.html(str);
+    },$id);
+   })();
+   
+  </script>
+</body>
+</html>

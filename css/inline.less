@@ -1,0 +1,196 @@
+@import url(commen.less);
+// 省钱控header设计
+.header-wrap{
+  // padding: 0;
+  & .logo{
+    text-align: center;
+    margin-right: 2.0rem;
+    color: @white;
+    margin: 0 auto;
+    // padding: 0;
+  }
+}
+.inline-pro{
+  background-color: @white;
+  & .inline-pro-wrap{
+    padding: 0.5rem;
+    & p{
+      font-size: 0.75rem;
+      margin: 0 auto;
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+    & .imgandtxt{
+      padding: 0.25rem;
+      box-sizing: border-box;
+      font-size: 0.75rem;
+      & .img-wrap{
+        width: 6.25rem;
+        height: 6.75rem;
+        // padding: 0.5rem;
+        box-sizing: border-box;
+        & img{
+          width: 100%;
+        }
+      }
+    }
+    & .bgImg{
+      padding: 0.25rem;
+      & img{
+        width: 100%;
+      }
+    }
+  }
+  & .district{
+    padding: 0.5rem;
+    box-sizing: border-box;
+      & ul{
+        text-align: center;
+        margin-top: 0.25rem;
+        padding: 1.0rem;
+        box-shadow: -1px 2px 2px #ccc,1px -2px 2px #ccc;
+        border:1px solid #eaeaea;
+        font-size: 0.75rem;
+        line-height: 1.25rem;
+        box-sizing: border-box;
+        // overflow:hidden
+        & li{
+          border-bottom:1px dotted #ccc;
+          width: 5rem;
+          margin: 0 auto;
+          & span{
+            color: #000;
+          }
+          & strong{
+             color: #f9b645;
+          }
+
+        }
+      }
+    }
+   & .gotobuy{
+      padding: 0.75rem;
+      box-sizing: border-box;
+      & button{
+        background-color: @color;
+        color: @white;
+        width: 100%;
+        height: 1.875rem;
+        line-height: 1.875rem;
+        border: none;
+        border-radius: 8px;
+        outline-style: none;
+      }
+    }
+    & .qr-wrap{
+      padding: 0.5rem;
+     
+      & .qr{
+        box-sizing:content-box;
+        // border:0.025rem solid red;
+        height: 6.75rem;
+        & img{
+          width: 100%;
+        }
+      }
+    }
+    & .save-comment{
+      background-color: @white;
+      padding: 0.25rem;
+      box-sizing: border-box;
+      & .cu-content-pl{
+
+        & .tit{
+          padding: 0.5rem;
+          font-size: 0.95rem;
+        }
+        .reply{
+          & textarea{
+            width: 95%;
+            display: block;
+            outline-style: none;
+            margin: 0 auto;
+          }
+          & .ctrl{
+            // width:1.5rem;
+            height: 1.5rem;
+            padding: 0.5rem;
+            & input{
+              background-color: @color;
+              color: @white;
+              width: 5.0rem;
+              height: 1.5rem;
+              border-radius: 8px;
+              float: right;
+            }
+          }
+        }
+        #newcomment{
+          font-size: 0.75rem;
+        }
+        .list{
+          li{
+            padding: 0.25rem;
+            position: relative;
+            margin-bottom: 2.0rem;
+            overflow: hidden;
+            .userimg{
+            width: 3.75rem;
+            height: 3.75rem;
+            border-radius: 50%;
+            overflow: hidden;
+            // border: 1px solid transparent;
+            & img{
+              width: 100%;
+            }
+          }
+          .con{
+            position: absolute;
+            left: 4.0rem;
+            font-size: 0.75rem;
+            padding: 0.25rem;
+            box-sizing: border-box;
+            width: 100%;
+            top: 0;
+            overflow: hidden;
+            .username{
+              float: left;
+              color: skyblue;
+            }
+            .time{
+              float: right;
+              margin-right: 4rem;
+              font-size: 0.7rem;
+              color:#ccc;
+            }
+            .content{
+              font-size: 0.70rem;
+              margin-top: 0.25rem;
+              width: 80%;
+              overflow : hidden;
+              text-overflow: ellipsis;
+              display: -webkit-box;
+              -webkit-line-clamp: 2;
+              -webkit-box-orient: vertical;
+              .yinyong{
+                // position: absolute;
+                // bottom: 0;
+                font-size: 0.70rem;
+                margin-top: 1.0rem;
+                width: 100%;
+                margin-top: 1.25rem;
+                overflow : hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+            }
+            }
+          }
+          }
+          
+        }
+      }
+
+    }
+}
